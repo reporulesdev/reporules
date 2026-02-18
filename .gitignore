@@ -1,0 +1,16 @@
+# Ignore everything
+*
+
+# Whitelist
+!.gitignore
+!README.md
+!package.json
+!package-lock.json
+!tsconfig.json
+!jest.config.js
+
+!src/
+!src/**
+
+!templates/
+!templates/**

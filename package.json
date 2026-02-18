@@ -1,0 +1,71 @@
+{
+  "name": "reporules",
+  "version": "0.1.0",
+  "description": "Automatically generate Claude Code rules from your codebase",
+  "main": "dist/console/index.js",
+  "bin": {
+    "reporules": "./dist/console/index.js"
+  },
+  "files": [
+    "dist/",
+    "prompts/",
+    "templates/",
+    "README.md",
+    "LICENSE",
+    "INSTALL.md",
+    ".env.example"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/console/index.ts",
+    "start": "node dist/console/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:llm:step1": "ts-node test/integration/preliminary-analysis.test.ts",
+    "test:llm:step1:simple": "ts-node test/integration/preliminary-simple.test.ts",
+    "test:llm:step1:hard": "ts-node test/integration/preliminary-hard.test.ts",
+    "test:llm:step2": "ts-node test/integration/detailed-analysis.test.ts",
+    "test:llm:step2:hard": "ts-node test/integration/detailed-hard.test.ts",
+    "test:llm:step2.5": "ts-node test/integration/classify-structure.test.ts",
+    "test:classify:structured": "ts-node test/integration/classify-structured.test.ts",
+    "test:classify:two-stage": "ts-node test/integration/classify-two-stage.test.ts",
+    "test:llm:step3": "ts-node test/integration/generate-rules.test.ts",
+    "test:llm:step3:hard": "ts-node test/integration/step3-hard.test.ts",
+    "test:llm:step3:simple": "ts-node test/integration/step3-simple.test.ts",
+    "test:decomposed": "ts-node test/integration/test-decomposed-rules.test.ts",
+    "test:meta-prompt": "ts-node test/integration/test-meta-prompt.test.ts",
+    "test:global": "ts-node test/integration/test-global-rules.test.ts",
+    "test:llm:full": "ts-node test/integration/full-workflow.test.ts",
+    "test:full:hard": "ts-node test/integration/test-hard-full.test.ts",
+    "test:full:simple:complex": "ts-node test/integration/test-simple-complex.test.ts",
+    "test:full:simple:standard": "ts-node test/integration/test-simple-standard.test.ts",
+    "test:analyze:hard:full": "ts-node test/integration/analyze-hard-repo-full.test.ts",
+    "test:analyze:hard:src": "ts-node test/integration/analyze-hard-repo-src-only.test.ts",
+    "test:analyze:simple:full": "ts-node test/integration/analyze-simple-repo-full.test.ts",
+    "test:analyze:simple:devrunner": "ts-node test/integration/analyze-simple-repo-devrunner.test.ts"
+  },
+  "keywords": [
+    "claude",
+    "ai",
+    "code-analysis",
+    "rules"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.74.0",
+    "@clack/prompts": "^1.0.0",
+    "commander": "^11.1.0",
+    "openai": "^6.18.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.10.0",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "packageManager": "npm@11.6.2+sha512.ee22b335fcbc95662cdf3ab8a053daf045d9cf9c6df6040d28965abb707512b2c16fa6c5eec049d34c74f78f390cebd14f697919eadb97756564d4f9eccc4954"
+}
