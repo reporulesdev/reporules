@@ -1,7 +1,7 @@
 import { callLLM } from '../../client/wrapper';
 import { PreliminaryAnalysisResult, RuleGenerationResult, SampleFile, PatternAnalysisResult, FileInfo } from '../../data/types';
 import { ProjectTree } from '../projectTree';
-import { PrefixStructureType } from './classifyPrefixStructure';
+import { SegmentStructureType } from './classifySegmentType';
 import { compressGuide } from './compressGuide';
 
 /**
@@ -9,7 +9,7 @@ import { compressGuide } from './compressGuide';
  */
 export interface RuleClassification {
   structured: boolean;
-  type?: PrefixStructureType; // 'template-based' | 'decomposed'
+  type?: SegmentStructureType; // 'template-based' | 'decomposed'
 }
 
 /**
@@ -1052,7 +1052,7 @@ ${samplesText}
  * @param debug - Debug mode
  * @returns Selected important files (5-10 files)
  */
-export async function selectMainFilesForSmallSegment(
+export async function pickSmallSegmentFiles(
   prefix: string,
   files: FileInfo[],
   model: string,
@@ -1132,7 +1132,7 @@ export type SmallSegmentType = 'domain' | 'decompounded' | 'lined';
  * @param debug - Debug mode
  * @returns Classified structure type
  */
-export async function classifySmallSegmentType(
+export async function classifySmallSegment(
   prefix: string,
   files: FileInfo[],
   model: string,
@@ -1495,7 +1495,7 @@ ${formatSampleFiles(sampleFiles)}
  * Small flat segments (< 15 files) may contain coding conventions,
  * config patterns, or style rules extractable directly from source code.
  */
-export async function generateRulesForSmallSegment(
+export async function generateSmallSegmentRules(
   prefix: string,
   prefixFiles: FileInfo[],
   sampleFiles: SampleFile[],

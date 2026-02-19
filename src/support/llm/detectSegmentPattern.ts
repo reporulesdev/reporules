@@ -25,7 +25,7 @@ interface SubdirectoryInfo {
  * - flat (structured=false): 구조 없음, 규칙 생성 스킵
  * - structured (structured=true): 구조 있음, 이후 template-based/decomposed 판단
  */
-export async function classifyStructured(
+export async function detectSegmentPattern(
   prefix: string,
   sampleFiles: FileInfo[],
   model: string = 'gpt-4o-mini',

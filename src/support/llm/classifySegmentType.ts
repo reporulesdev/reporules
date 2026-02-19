@@ -4,13 +4,13 @@ import { FileInfo, PatternAnalysisResult } from '../../data/types';
 /**
  * Prefix Structure Types (for structured code only)
  */
-export type PrefixStructureType = 'template-based' | 'decomposed';
+export type SegmentStructureType = 'template-based' | 'decomposed';
 
 /**
  * Prefix Structure Classification Result
  */
-export interface PrefixStructureClassification {
-  type: PrefixStructureType;
+export interface SegmentClassification {
+  type: SegmentStructureType;
   confidence: number;  // 0.0 ~ 1.0
   reasoning: string;
 }
@@ -30,13 +30,13 @@ interface SubdirectoryInfo {
  * Classifies the structure type of a prefix to determine
  * the appropriate rule generation strategy
  */
-export async function classifyPrefixStructure(
+export async function classifySegmentType(
   prefix: string,
   sampleFiles: FileInfo[],
   patterns: PatternAnalysisResult,
   model: string = 'gpt-5.1-2025-11-13',
   debug: boolean = false
-): Promise<PrefixStructureClassification> {
+): Promise<SegmentClassification> {
   // Build prompts
   const systemPrompt = buildSystemPrompt();
   const userPrompt = buildUserPrompt(prefix, sampleFiles, patterns);
@@ -60,7 +60,7 @@ export async function classifyPrefixStructure(
     debug
   });
 
-  const result = JSON.parse(content) as PrefixStructureClassification;
+  const result = JSON.parse(content) as SegmentClassification;
 
   if (debug) {
     console.log('✓ Classification complete');

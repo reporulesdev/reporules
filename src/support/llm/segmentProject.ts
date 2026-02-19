@@ -11,7 +11,7 @@ import { ProjectTree } from '../projectTree';
  * - Validates prefixes against actual project tree
  * - Retries up to 3 times if invalid prefixes are returned
  */
-export async function detailedAnalysis(
+export async function segmentProject(
   treeString: string,
   projectTree: ProjectTree,
   configFiles: Map<string, string>,

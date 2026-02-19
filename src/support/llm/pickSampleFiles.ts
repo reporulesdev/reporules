@@ -8,7 +8,7 @@ import { FileInfo } from '../../data/types';
  * Uses LLM to intelligently select representative sample files
  * when total lines exceed the budget.
  */
-export async function selectSampleFilesWithLLM(
+export async function pickSampleFiles(
   prefix: string,
   projectTree: ProjectTree,
   maxLines: number = 2000,

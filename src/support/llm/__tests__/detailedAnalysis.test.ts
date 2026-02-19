@@ -1,4 +1,4 @@
-import { detailedAnalysis } from '../detailedAnalysis';
+import { segmentProject } from '../segmentProject';
 import { callLLM } from '../../../client/wrapper';
 import { ProjectTree } from '../../projectTree';
 import { PreliminaryAnalysisResult } from '../../../data/types';
@@ -7,7 +7,7 @@ jest.mock('../../../client/wrapper');
 
 const mockCallLLM = callLLM as jest.MockedFunction<typeof callLLM>;
 
-describe('detailedAnalysis', () => {
+describe('segmentProject', () => {
   let mockProjectTree: ProjectTree;
   let prelimResult: PreliminaryAnalysisResult;
   let configFiles: Map<string, string>;
@@ -48,7 +48,7 @@ describe('detailedAnalysis', () => {
         .mockReturnValueOnce([{ relativePath: 'modules/api/User.java' }])     // api/ valid
         .mockReturnValueOnce([{ relativePath: 'modules/service/BookmarkReader.java' }]);  // service/ valid
 
-      const result = await detailedAnalysis(
+      const result = await segmentProject(
         'tree string',
         mockProjectTree,
         configFiles,
@@ -69,7 +69,7 @@ describe('detailedAnalysis', () => {
         { relativePath: 'src/User.java' }
       ]);
 
-      const result = await detailedAnalysis(
+      const result = await segmentProject(
         'tree string',
         mockProjectTree,
         configFiles,
@@ -100,7 +100,7 @@ describe('detailedAnalysis', () => {
 
       const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
 
-      const result = await detailedAnalysis(
+      const result = await segmentProject(
         'tree string',
         mockProjectTree,
         configFiles,
@@ -130,7 +130,7 @@ describe('detailedAnalysis', () => {
         .mockReturnValueOnce([{ relativePath: 'frontend/index.ts' }])
         .mockReturnValueOnce([{ relativePath: 'backend/main.java' }]);
 
-      const result = await detailedAnalysis(
+      const result = await segmentProject(
         'tree string',
         mockProjectTree,
         configFiles,
@@ -153,7 +153,7 @@ describe('detailedAnalysis', () => {
         { relativePath: 'openclaw/src/main.ts' }
       ]);
 
-      const result = await detailedAnalysis(
+      const result = await segmentProject(
         'tree string',
         mockProjectTree,
         configFiles,
@@ -176,7 +176,7 @@ describe('detailedAnalysis', () => {
         { relativePath: 'openclaw/apps/main.ts' }
       ]);
 
-      const result = await detailedAnalysis(
+      const result = await segmentProject(
         'tree string',
         mockProjectTree,
         configFiles,
@@ -206,7 +206,7 @@ describe('detailedAnalysis', () => {
 
       const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
 
-      const result = await detailedAnalysis(
+      const result = await segmentProject(
         'tree string',
         mockProjectTree,
         configFiles,
@@ -234,7 +234,7 @@ describe('detailedAnalysis', () => {
 
       jest.spyOn(console, 'log').mockImplementation();
 
-      await detailedAnalysis('tree', mockProjectTree, configFiles, prelimResult);
+      await segmentProject('tree', mockProjectTree, configFiles, prelimResult);
 
       // Check second call includes warning about failed prefix
       const secondCall = mockCallLLM.mock.calls[1];
@@ -269,7 +269,7 @@ describe('detailedAnalysis', () => {
 
       const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
 
-      const result = await detailedAnalysis(
+      const result = await segmentProject(
         'tree',
         mockProjectTree,
         configFiles,
@@ -298,7 +298,7 @@ describe('detailedAnalysis', () => {
 
       const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
 
-      const result = await detailedAnalysis(
+      const result = await segmentProject(
         'tree',
         mockProjectTree,
         configFiles,
@@ -326,7 +326,7 @@ describe('detailedAnalysis', () => {
         { relativePath: 'modules/api/User.java' }
       ]);
 
-      await detailedAnalysis(
+      await segmentProject(
         'tree string',
         mockProjectTree,
         configFiles,
@@ -352,7 +352,7 @@ describe('detailedAnalysis', () => {
       (mockProjectTree.getFiles as jest.Mock).mockReturnValue([]);
       (mockProjectTree.pickByPrefix as jest.Mock).mockReturnValue([{ relativePath: 'src/main.java' }]);
 
-      await detailedAnalysis(
+      await segmentProject(
         'tree',
         mockProjectTree,
         configFiles,
@@ -372,7 +372,7 @@ describe('detailedAnalysis', () => {
       (mockProjectTree.getFiles as jest.Mock).mockReturnValue([]);
       (mockProjectTree.pickByPrefix as jest.Mock).mockReturnValue([{ relativePath: 'src/main.java' }]);
 
-      await detailedAnalysis(
+      await segmentProject(
         'tree',
         mockProjectTree,
         configFiles,
@@ -394,7 +394,7 @@ describe('detailedAnalysis', () => {
         { relativePath: 'modules/api/User.java' }
       ]);
 
-      await detailedAnalysis(
+      await segmentProject(
         'tree',
         mockProjectTree,
         configFiles,
@@ -421,7 +421,7 @@ describe('detailedAnalysis', () => {
 
       const previousResult = { prefixes: ['modules/'] };
 
-      await detailedAnalysis(
+      await segmentProject(
         'tree',
         mockProjectTree,
         configFiles,

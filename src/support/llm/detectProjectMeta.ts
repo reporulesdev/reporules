@@ -10,7 +10,7 @@ import { deduplicateFilePatterns } from '../patternDeduplicator';
  * - Primary language
  * - Architecture hint
  */
-export async function preliminaryAnalysis(
+export async function detectProjectMeta(
   tree: string,
   model?: string
 ): Promise<PreliminaryAnalysisResult> {

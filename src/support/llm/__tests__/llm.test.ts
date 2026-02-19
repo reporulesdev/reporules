@@ -1,17 +1,17 @@
-import { preliminaryAnalysis } from '../preliminaryAnalysis';
-import { detailedAnalysis } from '../detailedAnalysis';
+import { detectProjectMeta } from '../detectProjectMeta';
+import { segmentProject } from '../segmentProject';
 import { generateLayerRules } from '../generateLayerRules';
 
 describe('LLM Support Functions', () => {
   describe('Module exports', () => {
-    it('should export preliminaryAnalysis function', () => {
-      expect(preliminaryAnalysis).toBeDefined();
-      expect(typeof preliminaryAnalysis).toBe('function');
+    it('should export detectProjectMeta function', () => {
+      expect(detectProjectMeta).toBeDefined();
+      expect(typeof detectProjectMeta).toBe('function');
     });
 
-    it('should export detailedAnalysis function', () => {
-      expect(detailedAnalysis).toBeDefined();
-      expect(typeof detailedAnalysis).toBe('function');
+    it('should export segmentProject function', () => {
+      expect(segmentProject).toBeDefined();
+      expect(typeof segmentProject).toBe('function');
     });
 
     it('should export generateLayerRules function', () => {
